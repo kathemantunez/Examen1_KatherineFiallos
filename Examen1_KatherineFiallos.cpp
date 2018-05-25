@@ -18,7 +18,9 @@ int main(){
 	int x1,x2,y2,y1;
 	bool estado=false;//estado de juego... para saber si gano alguien o no
 	bool estado_origen=false;
+	bool estado_origen2=false;
 	bool estado_move=false;
+	bool estado_move2=false;
 	char p1='o';
 	char p2='x';
 	examen1* juego=new examen1();
@@ -75,16 +77,25 @@ int main(){
 				cout<<"error\ny2:"<<endl;
 				cin>>y2;
 			}
-			estado_move=juego->validar_move(p1,x2,y2);
+			estado_move=juego->juegos(p1,x2,y2,x1,y1);
 			}//fin while
 
+			juego->printBoard();
+			x1=0;
+			x2=0;
+			y1=0;
+			y2=0;
 
-			turno++;
+			estado_move=false;
+			estado_origen=false;
 
-		}else{
+			
+
+		}
+		if(turno%2!=0){
 			//turno jugador2
 			cout<<"Turno de "<<jugador2<<" (x)"<<endl;
-			while(estado_origen==false){
+			while(estado_origen2==false){
 			cout<<"ingrese las cordenads de la pieza que desea mover"<<endl;
 			cout<<"x1:"<<endl;
 			cin>>x1;
@@ -98,12 +109,14 @@ int main(){
 				cout<<"erroe\ny1:"<<endl;
 				cin>>y1;
 			}
-			estado_origen=juego->validar_origen(p2,x1,y1);
+			
+			estado_origen2=juego->validar_origen(p2,x1,y1);
+			
 			}//fin while
 
 
 
-			while(estado_move==false){
+			while(estado_move2==false){
 			cout<<"ingrese las cordenadas a donde desea mover la pieza"<<endl;
 			cout<<"x2:"<<endl;
 			cin>>x2;
@@ -117,14 +130,20 @@ int main(){
 				cout<<"error\ny2:"<<endl;
 				cin>>y2;
 			}
-			estado_move=juego->validar_move(p2,x2,y2);
+			estado_move2=juego->juegos(p2,x2,y2,x1,y1);
 			}//fin while
-
-			turno++;
+			
+			juego->printBoard();
+			x2=0;
+			x1=0;
+			y1=0;
+			y2=0;
+			estado_origen2=false;
+			estado_move2=false;
 
 		}
 		
-
+	turno++;
 
 	}
 

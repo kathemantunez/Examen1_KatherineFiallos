@@ -7,11 +7,146 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+int examen1::ganador_x(){
+//probar si ya no hay o en el tablero
+	int cont=0;
+	for(int i=0;i<SIZE;i++){
+		for(int j=0;j<SIZE;j++){
+			if(tablero[i][j]=='o'){
+				cont++;
+			}
+		}
+	}
+	return cont;
 
+}
 
-bool juego(char signo,int fila, int columna){
+int examen1::ganador_o(){
+	//probar si ya no hay x en el tablero
+	int cont=0;
+	for(int i=0;i<SIZE;i++){
+		for(int j=0;j<SIZE;j++){
+			if(tablero[i][j]=='x'){
+				cont++;
+			}
+		}
+	}
+	return cont;
+}
+
+bool examen1:: juegos(char signo,int x2, int y2,int x1,int y1){
 	//jugador 1
+	if(signo=='o'){
+		//move izquierda
+		if(tablero[x2][y2]==tablero[x1-1][y1-1] ){
+			//valdiar espacios ocupados
+			if(tablero[x2][y2]==' '){
+				tablero[x2][y2]='o';
+				tablero[x1][y1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+			//espacio con x
+			if(tablero[x2][y2]=' ' && tablero[x2+1][y2+1]=='x'){
+				tablero[x2][y2]='o';
+				tablero[x2+1][y2+1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+		//move derecha
+		if(tablero[x2][y2]==tablero[x1-1][y1+1]){
+			//espacios ocupaods
+			if(tablero[x2][y2]==' '){
+				tablero[x2][y2]='o';
+				tablero[x1][y1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+			//espacio con x
+			if(tablero[x2][y2]==' ' && tablero[x2+1][y2-1]=='x'){
+				tablero[x2][y2]='o';
+				tablero[x2+1][y2-1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
+
+
 	
+
+
+	//juador_2
+	if(signo=='x'){
+
+		//move izquierda
+		if(tablero[x2][y2]==tablero[x1+1][y1-1]){
+			//espacio vacio
+			if(tablero[x2][y2]==' '){
+				tablero[x2][y2]='x';
+				tablero[x1][y1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+			//Espacio con o
+			if(tablero[x2][y2]==' ' && tablero[x2-1][y2+1]=='o'){
+				tablero[x2][y2]=='x';
+				tablero[x2-1][y2+1]==' ';
+				return true;
+			}else{
+				return false;
+
+			}
+
+
+		}else{
+			return false;
+		}
+
+
+		//move derecha
+		//
+		if(tablero[x2][y2]==tablero[x1+1][y1+1]){
+			//Espacios vacio
+			if(tablero[x2][y2]==' '){
+				tablero[x2][y2]='x';
+				tablero[x1][y1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+
+
+			//espacio con o
+			//
+			if(tablero[x2][y2]==' ' && tablero[x2-1][y2-1]=='o'){
+				tablero[x2][y2]='x';
+				tablero[x2-1][y2-1]=' ';
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
+
+	
+
+		
 
 
 }
@@ -34,14 +169,14 @@ bool examen1::validar_origen(char signo,int fila,int columna){
 	}
 	
 }
-
+/*
 //validar movimiento
-bool examen1::validar_move(char signo,int fila,int columna){
+bool examen1::validar_move(char signo,int x2,int y2,int x1,int y1){
 	bool estado=false;
 	if(signo=='o' || signo=='O'){
 		
-		estado=juego(signo,fila,columna);
-		if(estado=true){
+		estado=juego(signo,x2,y2,x1,y1);
+		if(estado==true){
 			return true;
 		}else{
 			return false;
@@ -49,8 +184,8 @@ bool examen1::validar_move(char signo,int fila,int columna){
 	}
 
 	if(signo=='x' || signo=='X'){
-		estado=juego(signo,fila,columna);
-		if(estado=true){
+		estado=juego(signo,x2,y2,x1,y1);
+		if(estado==true){
 			return true;
 		}else{
 			return false;
@@ -60,7 +195,7 @@ bool examen1::validar_move(char signo,int fila,int columna){
 	}
 
 }
-
+*/
 //crear matrix
 char** examen1::createMatrix(){
 	char char1='x';
